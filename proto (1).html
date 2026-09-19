@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Med Connect — Next-Gen Healthcare Ecosystem</title>
+  <style>
+    /* =============================================
+       MED CONNECT — Next-Gen Stylesheet
+       Healthcare Design: White, Blue & Green
+    ============================================= */
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --blue-dark: #0D47A1;
+      --blue-main: #1976D2;
+      --blue-light: #42A5F5;
+      --blue-pale: #E3F2FD;
+      --green-dark: #1B5E20;
+      --green-main: #2E7D32;
+      --green-light: #66BB6A;
+      --green-pale: #E8F5E9;
+      --teal: #00897B;
+      --teal-dark: #004D40;
+      --teal-pale: #E0F2F1;
+      --white: #FFFFFF;
+      --bg: #F4F7FC;
+      --surface: #FFFFFF;
+      --border: #E2E8F0;
+      --text-primary: #1A202C;
+      --text-secondary: #4A5568;
+      --text-muted: #718096;
+      --red: #E53E3E;
+      --orange: #ED8936;
+      --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+      --shadow-md: 0 10px 25px -3px rgba(25,118,210,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 20px 40px -10px rgba(25,118,210,0.15);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    input, select, textarea { font-family: inherit; }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(46, 125, 50, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .animate-fade { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    /* SOS Bar */
+    .sos-bar {
+      background: linear-gradient(90deg, #9B2C2C, #E53E3E);
+      color: white;
+      padding: 10px 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: inset 0 -2px 4px rgba(0,0,0,0.1);
+    }
+    .sos-btn {
+      background: white;
+      color: #9B2C2C;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      animation: pulseGlow 2s infinite;
+      transition: var(--transition);
+    }
+    .sos-btn:hover { transform: scale(1.05); }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-brand .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--blue-main), var(--green-main));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+    }
+    .nav-brand .brand-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      background: linear-gradient(135deg, var(--blue-main), var(--green-main));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-links a {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--blue-main);
+      background: var(--blue-pale);
+    }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .btn-nav-login {
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 2px solid var(--blue-main);
+      color: var(--blue-main);
+      transition: var(--transition);
+    }
+    .btn-nav-login:hover { background: var(--blue-pale); }
+    .btn-nav-admin {
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--blue-main), var(--teal));
+      color: white;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(0, 137, 123, 0.25);
+    }
+    .btn-nav-admin:hover { opacity: 0.95; transform: translateY(-2px); }
+
+    /* Hero Section with Graphic Backdrop */
+    .page-header {
+      background: linear-gradient(135deg, #0D47A1 0%, #1976D2 50%, #00897B 100%);
+      color: white;
+      padding: 70px 24px 90px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      top: -200px; right: -150px;
+      pointer-events: none;
+    }
+    .page-header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .page-header p {
+      opacity: 0.92;
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+    /* Buttons & Badges */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
+      color: white;
+      box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+    }
+    .btn-primary:hover { opacity: 0.95; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(25, 118, 210, 0.5); }
+    .btn-green {
+      background: linear-gradient(135deg, var(--green-main), var(--green-dark));
+      color: white;
+      box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+    }
+    .btn-green:hover { opacity: 0.95; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(46, 125, 50, 0.5); }
+    
+    /* High-contrast solid button for Check Bed Status */
+    .btn-solid-teal {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: white;
+      box-shadow: 0 6px 20px rgba(0, 77, 64, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-solid-teal:hover { opacity: 0.95; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 77, 64, 0.5); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .badge-available { background: #DCFCE7; color: #166534; }
+    .badge-low { background: #FEF3C7; color: #92400E; }
+    .badge-danger { background: #FEE2E2; color: #991B1B; }
+
+    /* Cards & Layout */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 60px 0; }
+    .section-sm { padding: 30px 0; }
+    .section-title { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--text-primary); margin-bottom: 6px; }
+    .section-sub { color: var(--text-muted); margin-bottom: 28px; font-size: 1rem; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* Tool Cards Floating Banner */
+    .tool-banner-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: -50px;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 30px;
+    }
+    .tool-card {
+      background: white;
+      padding: 30px 24px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: var(--transition);
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+    .tool-card:nth-child(2) { animation-delay: 2s; }
+    .tool-card:nth-child(3) { animation-delay: 4s; }
+    .tool-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--blue-light); }
+    .tool-icon {
+      width: 64px; height: 64px;
+      border-radius: 20px;
+      background: var(--blue-pale);
+      color: var(--blue-main);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 16px;
+      box-shadow: inset 0 2px 4px rgba(25,118,210,0.1);
+    }
+    .tool-card h3 { font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+    .tool-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; }
+
+    /* Standard Cards */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      overflow: hidden;
+    }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .card-body { padding: 24px; }
+
+    /* Filter Pills */
+    .filter-pills { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .filter-pill {
+      padding: 8px 18px;
+      border-radius: 30px;
+      background: white;
+      border: 1.5px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-pill:hover, .filter-pill.active {
+      background: var(--blue-pale);
+      color: var(--blue-main);
+      border-color: var(--blue-main);
+      box-shadow: 0 4px 12px rgba(25,118,210,0.15);
+    }
+
+    /* Search Bar */
+    .search-bar { position: relative; width: 100%; margin-bottom: 24px; }
+    .search-bar input {
+      width: 100%;
+      padding: 14px 20px 14px 50px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      background: white;
+      outline: none;
+      transition: var(--transition);
+    }
+    .search-bar input:focus { border-color: var(--blue-main); box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.12); }
+    .search-bar .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: var(--text-muted); }
+
+    /* Progress Bar */
+    .progress-bar-wrap { background: #EDF2F7; border-radius: 10px; height: 10px; width: 100%; overflow: hidden; margin: 8px 0 16px; }
+    .progress-bar-fill { background: var(--green-main); height: 100%; border-radius: 10px; transition: width 0.6s ease; }
+    .progress-bar-fill.warning { background: var(--orange); }
+    .progress-bar-fill.danger { background: var(--red); }
+
+    /* AI Chatbot Floating Widget */
+    .chatbot-toggle-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--blue-main), var(--teal));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 10px 30px rgba(25, 118, 210, 0.4);
+      cursor: pointer;
+      z-index: 1000;
+      transition: var(--transition);
+      animation: pulseGlow 2.5s infinite;
+    }
+    .chatbot-toggle-btn:hover { transform: scale(1.1); }
+
+    .chatbot-window {
+      position: fixed;
+      bottom: 105px;
+      right: 30px;
+      width: 380px;
+      max-height: 520px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform-origin: bottom right;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chatbot-window.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
+    
+    .chatbot-header {
+      background: linear-gradient(135deg, var(--blue-main), var(--teal));
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chatbot-header h4 { font-family: 'Poppins', sans-serif; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .chatbot-messages {
+      padding: 16px;
+      flex: 1;
+      overflow-y: auto;
+      max-height: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #FAFCFF;
+    }
+    .chat-msg {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .chat-msg.bot { background: white; color: var(--text-primary); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 2px; }
+    .chat-msg.user { background: var(--blue-main); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+    
+    .chatbot-input-area {
+      padding: 12px 16px;
+      background: white;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+    }
+    .chatbot-input-area input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .chatbot-input-area input:focus { border-color: var(--blue-main); }
+    .chatbot-input-area button {
+      background: var(--blue-main);
+      color: white;
+      padding: 0 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+
+    /* Modals & Toasts */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000;
+      display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px);
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal {
+      background: white; border-radius: var(--radius-xl); width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-lg);
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .modal-header h3 { font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 700; }
+    .modal-close { font-size: 1.4rem; cursor: pointer; color: var(--text-muted); }
+    .modal-body { padding: 24px; }
+    .modal-footer { padding: 18px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px; }
+
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+    .form-control {
+      width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 0.95rem; background: white; outline: none; transition: var(--transition);
+    }
+    .form-control:focus { border-color: var(--blue-main); box-shadow: 0 0 0 3px rgba(25,118,210,0.1); }
+
+    .toast-container { position: fixed; bottom: 30px; left: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+    .toast {
+      background: #1A202C; color: white; padding: 14px 22px; border-radius: var(--radius-md); font-size: 0.9rem; font-weight: 600; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 12px; pointer-events: auto; animation: fadeIn 0.3s ease;
+    }
+    .toast.toast-success { background: var(--green-dark); }
+
+    footer { background: #111827; color: #9CA3AF; padding: 60px 24px 24px; margin-top: 80px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 36px; border-bottom: 1px solid #1F2937; margin-bottom: 24px; }
+    .footer-col h4 { color: white; font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { font-size: 0.88rem; color: #9CA3AF; transition: var(--transition); }
+    .footer-col ul li a:hover { color: var(--blue-light); }
+    .footer-bottom { text-align: center; font-size: 0.85rem; color: #6B7280; }
+
+    @media (max-width: 900px) {
+      .tool-banner-grid { grid-template-columns: 1fr; margin-top: 20px; }
+      .grid-3, .grid-2, .footer-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .chatbot-window { width: 92vw; right: 4vw; }
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Emergency SOS Bar -->
+  <div class="sos-bar animate-fade">
+    <span>🚨 <strong>Critical Emergency?</strong> Instant 24/7 Ambulance & ICU Dispatch is active.</span>
+    <button class="sos-btn" onclick="triggerSOS()">Call SOS 108</button>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <div class="brand-icon">💊</div>
+        <span class="brand-name">MED CONNECT</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#medicines">Find Medicines</a>
+        <a href="#hospitals">Live Beds</a>
+        <a href="#refill">Prescription Refill</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn-nav-login" onclick="openModal('loginModal')">Patient Login</button>
+        <button class="btn-nav-admin" onclick="openModal('adminModal')">Admin Portal</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="page-header" id="home">
+    <div class="animate-fade">
+      <h1>Intelligent Healthcare & Pharmacy Hub</h1>
+      <p>Seamlessly track live medicine inventories, check multi-specialty hospital bed occupancy, and consult our AI medical guide instantly.</p>
+      <div class="hero-actions">
+        <a href="#medicines" class="btn btn-green">Explore Medicines</a>
+        <!-- Updated to high-contrast button class btn-solid-teal -->
+        <a href="#hospitals" class="btn btn-solid-teal">Check Bed Status</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Floating Tool Banner -->
+  <div class="container">
+    <div class="tool-banner-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🤖</div>
+        <h3>AI Symptom Analyzer</h3>
+        <p>Evaluate your symptoms immediately and get redirected to the ideal medical department.</p>
+        <button class="btn btn-primary btn-sm w-full" onclick="openModal('symptomModal')">Start Checkup</button>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📄</div>
+        <h3>Upload Prescription</h3>
+        <p>Send physical or digital prescriptions to local networked pharmacies for instant packing.</p>
+        <button class="btn btn-green btn-sm w-full" onclick="openModal('refillModal')">Upload Rx</button>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">⏱️</div>
+        <h3>Live Wait Times</h3>
+        <p>Check real-time queue estimates for emergency rooms and outpatient departments.</p>
+        <a href="#hospitals" class="btn btn-solid-teal btn-sm w-full" style="padding: 10px 16px; font-size: 0.85rem;">View Wait Times</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="container section">
+
+    <!-- Medicine Inventory Section -->
+    <section id="medicines" class="section-sm">
+      <h2 class="section-title">Pharmacy Medicine Inventory</h2>
+      <p class="section-sub">Live stock tracking across regional partner pharmacies.</p>
+
+      <div class="filter-pills">
+        <button class="filter-pill active" onclick="filterMedCategory('all', this)">All Categories</button>
+        <button class="filter-pill" onclick="filterMedCategory('pain', this)">Pain & Fever</button>
+        <button class="filter-pill" onclick="filterMedCategory('antibiotic', this)">Antibiotics</button>
+        <button class="filter-pill" onclick="filterMedCategory('chronic', this)">Chronic & Diabetes</button>
+      </div>
+
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="medSearch" placeholder="Search by medicine name (e.g., Paracetamol, Amoxicillin)..." onkeyup="searchMedicines()">
+      </div>
+
+      <div class="grid-3" id="medGrid">
+        <div class="card card-body med-card" data-category="pain" data-name="paracetamol">
+          <div class="flex justify-between items-center mb-8">
+            <span class="badge badge-available">● In Stock</span>
+            <strong style="color: var(--green-dark); font-size: 1.1rem;">₹25.00</strong>
+          </div>
+          <h3 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 4px;">Paracetamol 500mg</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Strip of 10 tablets | City Life Pharmacy</p>
+          <button class="btn btn-primary btn-sm w-full" onclick="openOrderModal('Paracetamol 500mg', 'City Life Pharmacy', '₹25.00')">Reserve Medicine</button>
+        </div>
+
+        <div class="card card-body med-card" data-category="antibiotic" data-name="amoxicillin">
+          <div class="flex justify-between items-center mb-8">
+            <span class="badge badge-low">● Low Stock</span>
+            <strong style="color: var(--green-dark); font-size: 1.1rem;">₹120.00</strong>
+          </div>
+          <h3 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 4px;">Amoxicillin 250mg</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Capsules | MedPlus Health Hub</p>
+          <button class="btn btn-primary btn-sm w-full" onclick="openOrderModal('Amoxicillin 250mg', 'MedPlus Health Hub', '₹120.00')">Reserve Medicine</button>
+        </div>
+
+        <div class="card card-body med-card" data-category="chronic" data-name="insulin">
+          <div class="flex justify-between items-center mb-8">
+            <span class="badge badge-available">● In Stock</span>
+            <strong style="color: var(--green-dark); font-size: 1.1rem;">₹450.00</strong>
+          </div>
+          <h3 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 4px;">Human Actrapid Insulin</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Injectable Vial | CareAll Pharmacy</p>
+          <button class="btn btn-primary btn-sm w-full" onclick="openOrderModal('Human Actrapid Insulin', 'CareAll Pharmacy', '₹450.00')">Reserve Medicine</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hospital Beds & Capacity Section -->
+    <section id="hospitals" class="section-sm mt-24">
+      <h2 class="section-title">Hospital Bed Capacity & Wait Times</h2>
+      <p class="section-sub">Real-time bed occupancy monitoring for fast medical admissions.</p>
+
+      <div class="grid-2">
+        <div class="card card-body">
+          <div class="flex justify-between items-center mb-8">
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Metro General Hospital</h3>
+            <span class="badge badge-available">Open 24/7</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Est. ER Wait Time: <strong>15 mins</strong></p>
+          
+          <div style="font-size: 0.88rem; font-weight: 600;">General Ward Availability (24 / 50 beds free)</div>
+          <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width: 48%;"></div></div>
+
+          <div style="font-size: 0.88rem; font-weight: 600;">ICU Unit Availability (4 / 20 beds free)</div>
+          <div class="progress-bar-wrap"><div class="progress-bar-fill warning" style="width: 20%;"></div></div>
+
+          <button class="btn btn-green btn-sm w-full mt-12" onclick="openModal('apptModal')">Book Consultation / Bed</button>
+        </div>
+
+        <div class="card card-body">
+          <div class="flex justify-between items-center mb-8">
+            <h3 style="font-size: 1.15rem; font-weight: 700;">St. Jude Medical Center</h3>
+            <span class="badge badge-available">Open 24/7</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Est. ER Wait Time: <strong>45 mins</strong></p>
+          
+          <div style="font-size: 0.88rem; font-weight: 600;">General Ward Availability (5 / 40 beds free)</div>
+          <div class="progress-bar-wrap"><div class="progress-bar-fill danger" style="width: 12%;"></div></div>
+
+          <div style="font-size: 0.88rem; font-weight: 600;">ICU Unit Availability (0 / 15 beds free)</div>
+          <div class="progress-bar-wrap"><div class="progress-bar-fill danger" style="width: 0%;"></div></div>
+
+          <button class="btn btn-green btn-sm w-full mt-12" onclick="openModal('apptModal')">Book Consultation / Bed</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 style="color: white; font-family: 'Poppins', sans-serif; margin-bottom: 12px; font-size: 1.2rem;">MED CONNECT</h3>
+          <p style="font-size: 0.88rem; line-height: 1.6;">Unified healthcare resource ecosystem connecting patients, regional pharmacies, and multi-specialty hospitals.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#medicines">Find Medicines</a></li>
+            <li><a href="#hospitals">Hospital Beds</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Services</h4>
+          <ul>
+            <li><a href="#" onclick="openModal('symptomModal')">AI Symptom Triage</a></li>
+            <li><a href="#" onclick="openModal('refillModal')">Prescription Upload</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Emergency Support</h4>
+          <p style="color: white; font-weight: 700; font-size: 1rem;">Helpline: 108 / 112</p>
+          <p style="font-size: 0.82rem; margin-top: 6px;">Available 24 hours daily.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Med Connect Systems. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- AI Chatbot Floating Widget -->
+  <div class="chatbot-toggle-btn" onclick="toggleChatbot()" title="Chat with AI Health Assistant">
+    💬
+  </div>
+  <div class="chatbot-window hidden" id="chatbotWindow">
+    <div class="chatbot-header">
+      <h4>🤖 Med Connect AI Assistant</h4>
+      <span class="modal-close" style="color: white;" onclick="toggleChatbot()">&times;</span>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="chat-msg bot">Hello! I am your Med Connect AI health companion. How can I assist you with finding medicines or booking hospital visits today?</div>
+    </div>
+    <div class="chatbot-input-area">
+      <input type="text" id="chatInput" placeholder="Ask a health question..." onkeypress="handleChatKey(event)">
+      <button onclick="sendChatMessage()">Send</button>
+    </div>
+  </div>
+
+  <!-- AI Symptom Checker Modal -->
+  <div class="modal-overlay hidden" id="symptomModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>AI Symptom Triage Assistant</h3>
+        <span class="modal-close" onclick="closeModal('symptomModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Describe your primary symptoms to receive recommended clinical departments.</p>
+        <div class="form-group">
+          <label class="form-label">Describe your symptoms</label>
+          <textarea class="form-control" rows="3" placeholder="e.g., Severe headache, high fever, dizziness..."></textarea>
+        </div>
+        <div id="symptomResult" class="hidden" style="background: var(--blue-pale); padding: 14px; border-radius: var(--radius-sm); font-size: 0.9rem; color: var(--blue-dark); margin-bottom: 12px; font-weight: 500;">
+          <strong>AI Recommendation:</strong> Immediate evaluation recommended at General Medicine / Outpatient Department.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('symptomModal')">Close</button>
+        <button class="btn btn-primary" onclick="runAISymptomCheck()">Analyze Symptoms</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prescription Refill Modal -->
+  <div class="modal-overlay hidden" id="refillModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Upload Prescription for Refill</h3>
+        <span class="modal-close" onclick="closeModal('refillModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Patient Full Name</label>
+          <input type="text" class="form-control" placeholder="Enter full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Upload Prescription File (Image / PDF)</label>
+          <input type="file" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Partner Pharmacy</label>
+          <select class="form-control">
+            <option>City Life Pharmacy (1.2 km)</option>
+            <option>MedPlus Health Hub (2.5 km)</option>
+            <option>CareAll Pharmacy (0.8 km)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('refillModal')">Cancel</button>
+        <button class="btn btn-green" onclick="submitGeneralAction('Prescription uploaded successfully! Pharmacy notified.')">Submit Rx</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order / Reserve Modal -->
+  <div class="modal-overlay hidden" id="orderModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="orderModalTitle">Reserve Medicine</h3>
+        <span class="modal-close" onclick="closeModal('orderModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p id="orderModalSubtitle" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;"></p>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" placeholder="Enter full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mobile Number</label>
+          <input type="text" class="form-control" placeholder="Enter contact number">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('orderModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="submitGeneralAction('Medicine successfully reserved!')">Confirm Reservation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Appointment Booking Modal -->
+  <div class="modal-overlay hidden" id="apptModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Book Hospital Consultation / Bed</h3>
+        <span class="modal-close" onclick="closeModal('apptModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Patient Name</label>
+          <input type="text" class="form-control" placeholder="Enter patient name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Select Department / Ward</label>
+          <select class="form-control">
+            <option>General Consultation</option>
+            <option>Emergency Ward Admission</option>
+            <option>ICU Bed Reservation</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('apptModal')">Cancel</button>
+        <button class="btn btn-green" onclick="submitGeneralAction('Consultation & Bed booked successfully!')">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Login Modal -->
+  <div class="modal-overlay hidden" id="loginModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Patient Portal Login</h3>
+        <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label class="form-label">Email or Phone</label><input type="text" class="form-control" placeholder="name@example.com"></div>
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-control" placeholder="••••••••"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('loginModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="submitGeneralAction('Patient login successful!')">Sign In</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Portal Modal -->
+  <div class="modal-overlay hidden" id="adminModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Admin & Staff Portal</h3>
+        <span class="modal-close" onclick="closeModal('adminModal')">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label class="form-label">Staff ID</label><input type="text" class="form-control" placeholder="admin_staff_id"></div>
+        <div class="form-group"><label class="form-label">Secure Password</label><input type="password" class="form-control" placeholder="••••••••"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('adminModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="submitGeneralAction('Admin Access Granted!')">Access Portal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script>
+    // Modal Helpers
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    // Emergency SOS Trigger
+    function triggerSOS() {
+      showToast('🚨 SOS Emergency Dispatched! Connecting ambulance services...', 'success');
+    }
+
+    // AI Symptom Checker
+    function runAISymptomCheck() {
+      document.getElementById('symptomResult').classList.remove('hidden');
+    }
+
+    // Dynamic Order Modal Setup
+    function openOrderModal(med, pharmacy, price) {
+      document.getElementById('orderModalTitle').innerText = `Reserve: ${med}`;
+      document.getElementById('orderModalSubtitle').innerText = `Pharmacy: ${pharmacy} | Price: ${price}`;
+      openModal('orderModal');
+    }
+
+    // Universal Action Confirmation
+    function submitGeneralAction(msg) {
+      closeModal('orderModal');
+      closeModal('apptModal');
+      closeModal('loginModal');
+      closeModal('adminModal');
+      closeModal('refillModal');
+      showToast(msg, 'success');
+    }
+
+    // Medicine Filters & Search
+    function filterMedCategory(cat, el) {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      document.querySelectorAll('.med-card').forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function searchMedicines() {
+      const q = document.getElementById('medSearch').value.toLowerCase();
+      document.querySelectorAll('.med-card').forEach(card => {
+        const name = card.getAttribute('data-name');
+        card.style.display = name.includes(q) ? 'block' : 'none';
+      });
+    }
+
+    // AI Chatbot Widget Logic
+    function toggleChatbot() {
+      document.getElementById('chatbotWindow').classList.toggle('hidden');
+    }
+
+    function handleChatKey(e) {
+      if (e.key === 'Enter') sendChatMessage();
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('chatbotMessages');
+      
+      // Append User Message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'chat-msg user';
+      userMsg.innerText = text;
+      container.appendChild(userMsg);
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      // Simulated Intelligent Bot Reply
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'chat-msg bot';
+        
+        const lower = text.toLowerCase();
+        if (lower.includes('bed') || lower.includes('hospital')) {
+          botMsg.innerText = 'We currently have real-time tracking for Metro General Hospital and St. Jude Medical Center. You can check bed status directly in the Live Beds section!';
+        } else if (lower.includes('medicine') || lower.includes('paracetamol') || lower.includes('insulin')) {
+          botMsg.innerText = 'You can search for available medication strips and vials under our Pharmacy Inventory section and reserve them instantly.';
+        } else {
+          botMsg.innerText = 'Thanks for your query! I recommend checking our AI Symptom Analyzer tool or calling our emergency helpline at 108 if it is urgent.';
+        }
+        
+        container.appendChild(botMsg);
+        container.scrollTop = container.scrollHeight;
+      }, 600);
+    }
+
+    // Toast Notification System
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `<span>✅</span> ${message}`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
